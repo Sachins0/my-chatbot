@@ -38,6 +38,7 @@ The application's real-time functionality is achieved through a clean and secure
     * `sendMessage`: Calls the custom Hasura Action to trigger the bot.
 2.  **Hasura Action Trigger**: The `sendMessage` action securely calls a pre-configured webhook URL, passing the chat ID and the user's message to an n8n workflow.
 3.  **n8n Workflow Execution**:
+    ![alt text](https://i.ibb.co/B5QC1R3F/Screenshot-2025-08-13-145950.png)
     * The n8n workflow receives the data from the webhook.
     * It makes an API call to OpenRouter, sending the user's message to get an AI-generated response.
     * It then sends another GraphQL mutation back to Hasura to save the bot's response to the `messages` table.
