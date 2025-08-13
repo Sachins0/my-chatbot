@@ -48,9 +48,9 @@ const Chat = () => {
     <div className="chat-layout">
       <div className="sidebar">
         <div className="sidebar-header">
-          <h3>Chats</h3>
+          <h3>Your Chats</h3>
           <button onClick={() => createChat()} disabled={creatingChat}>
-            {creatingChat ? '...' : '+ New Chat'}
+            {creatingChat ? 'Creating...' : '+ New Chat'}
           </button>
         </div>
         <div className="chat-list">

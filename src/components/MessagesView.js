@@ -28,8 +28,17 @@ const MessagesView = ({ chatId }) => {
     scrollToBottom();
   }, [data]); // Scroll whenever new data arrives
 
-  if (loading) return <p>Loading messages...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+ if (loading) return (
+  <div className="loading-spinner">
+    <div className="spinner"></div>
+    <span>Loading messages...</span>
+  </div>
+);
+  if (error) return (
+  <div className="error-message">
+    <strong>Error:</strong> {error.message}
+  </div>
+);
 
   return (
     <div className="messages-list">
