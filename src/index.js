@@ -6,8 +6,6 @@ import { NhostClient, NhostReactProvider } from '@nhost/react';
 import { NhostApolloProvider } from '@nhost/react-apollo';
 import './index.css';
 
-console.log(process.env.REACT_APP_SUB_DOMAIN, process.env.REACT_APP_REGION);
-
 // 1. Configure the Nhost client
 const nhost = new NhostClient({
   subdomain: process.env.REACT_APP_SUB_DOMAIN, // <-- Paste from your Nhost dashboard

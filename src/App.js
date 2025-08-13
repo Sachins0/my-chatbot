@@ -9,9 +9,12 @@ function App() {
   const { isAuthenticated, isLoading } = useAuthenticationStatus();
 
   // While Nhost is checking, show a loading message
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return (
+  <div className="loading-spinner">
+    <div className="spinner"></div>
+    <span>Loading...</span>
+  </div>
+);
 
   // If the user is NOT logged in, show the Auth component
   if (!isAuthenticated) {
