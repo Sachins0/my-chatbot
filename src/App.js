@@ -1,28 +1,90 @@
 // src/App.js
+import React from 'react';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { useAuthenticationStatus } from '@nhost/react';
-import Auth from './components/Auth'; // We will create this
-import Chat from './components/Chat'; // We will create this
-import './App.css'; 
+import Auth from './components/Auth';
+import Chat from './components/Chat';
+import { Box, CircularProgress } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#6366f1',
+      light: '#8b87f7',
+      dark: '#4f46e5',
+    },
+    secondary: {
+      main: '#10b981',
+      light: '#34d399',
+      dark: '#059669',
+    },
+    background: {
+      default: '#f8fafc',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#1e293b',
+      secondary: '#64748b',
+    },
+  },
+  typography: {
+    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    h4: {
+      fontWeight: 600,
+    },
+    h6: {
+      fontWeight: 500,
+    },
+  },
+  shape: {
+    borderRadius: 12,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: 8,
+          fontWeight: 500,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        },
+      },
+    },
+  },
+});
 
 function App() {
-  // This hook checks if a user is logged in
   const { isAuthenticated, isLoading } = useAuthenticationStatus();
 
-  // While Nhost is checking, show a loading message
-  if (isLoading) return (
-  <div className="loading-spinner">
-    <div className="spinner"></div>
-    <span>Loading...</span>
-  </div>
-);
-
-  // If the user is NOT logged in, show the Auth component
-  if (!isAuthenticated) {
-    return <Auth />;
+  if (isLoading) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box 
+          display="flex" 
+          justifyContent="center" 
+          alignItems="center" 
+          minHeight="100vh"
+          bgcolor="background.default"
+        >
+          <CircularProgress size={40} />
+        </Box>
+      </ThemeProvider>
+    );
   }
 
-  // If the user IS logged in, show the main Chat component
-  return <Chat />;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {isAuthenticated ? <Chat /> : <Auth />}
+    </ThemeProvider>
+  );
 }
 
 export default App;
