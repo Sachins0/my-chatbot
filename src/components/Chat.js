@@ -54,7 +54,7 @@ const Chat = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const { loading, error, data, refetch } = useQuery(GET_CHATS);
+  const { loading, data, refetch } = useQuery(GET_CHATS);
   const [createChat, { loading: creatingChat }] = useMutation(CREATE_CHAT, {
     onCompleted: (data) => {
       setSelectedChatId(data.insert_chats_one.id);

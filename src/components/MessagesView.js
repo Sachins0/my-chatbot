@@ -6,7 +6,6 @@ import {
   Typography,
   CircularProgress,
   Avatar,
-  useTheme,
 } from '@mui/material';
 import { Person, SmartToy } from '@mui/icons-material';
 import { useSubscription, gql } from '@apollo/client';
@@ -27,7 +26,6 @@ const MessagesView = ({ chatId }) => {
     variables: { chat_id: chatId },
   });
   const messagesEndRef = useRef(null);
-  const theme = useTheme();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
