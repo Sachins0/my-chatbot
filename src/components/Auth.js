@@ -72,7 +72,10 @@ const Auth = () => {
           <CardContent sx={{ p: isMobile ? 3 : 4 }}>
             <Box textAlign="center" mb={3}>
               <Typography variant="h4" component="h1" gutterBottom>
-                Welcome Back
+                Nexus Chat AI
+              </Typography>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Welcome
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 Sign in to continue your conversation or create a new account
