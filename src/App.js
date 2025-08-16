@@ -85,8 +85,6 @@ function App() {
       return <Auth />;
     }
 
-    console.log('user:', user);
-
     // NEW LOGIC: If authenticated but not verified, show the VerifyEmail component
     // We also check if the user object exists before trying to read a property on it.
     if (user && !user.emailVerified) {
