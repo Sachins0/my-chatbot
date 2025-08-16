@@ -1,9 +1,11 @@
 // src/App.js
 import React from 'react';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { useAuthenticationStatus } from '@nhost/react';
+// Import the hooks we need for verification
+import { useAuthenticationStatus, useUserData } from '@nhost/react'; 
 import Auth from './components/Auth';
 import Chat from './components/Chat';
+import VerifyEmail from './components/VerifyEmail'; // Import the new component
 import { Box, CircularProgress } from '@mui/material';
 
 const theme = createTheme({
@@ -61,11 +63,12 @@ const theme = createTheme({
 
 function App() {
   const { isAuthenticated, isLoading } = useAuthenticationStatus();
+  const user = useUserData(); // Get the current user's data
 
-  if (isLoading) {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+  // This function will decide which component to render
+  const renderContent = () => {
+    if (isLoading) {
+      return (
         <Box 
           display="flex" 
           justifyContent="center" 
@@ -75,14 +78,29 @@ function App() {
         >
           <CircularProgress size={40} />
         </Box>
-      </ThemeProvider>
-    );
-  }
+      );
+    }
+
+    if (!isAuthenticated) {
+      return <Auth />;
+    }
+
+    console.log('user:', user);
+
+    // NEW LOGIC: If authenticated but not verified, show the VerifyEmail component
+    // We also check if the user object exists before trying to read a property on it.
+    if (user && !user.emailVerified) {
+      return <VerifyEmail />;
+    }
+
+    // If authenticated and verified, show the Chat component
+    return <Chat />;
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {isAuthenticated ? <Chat /> : <Auth />}
+      {renderContent()}
     </ThemeProvider>
   );
 }
