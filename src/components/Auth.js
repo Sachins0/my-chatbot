@@ -98,7 +98,7 @@ const Auth = () => {
                 Sign Up Successful!
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Please check your email and click the verification link to continue.
+                Please check your email(especially spam folder) and click the verification link to continue.
               </Typography>
             </CardContent>
           </Card>
